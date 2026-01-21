@@ -1,0 +1,49 @@
+                                                                 # DECISION TREE REGRESSOR
+
+from sklearn.tree import DecisionTreeRegressor
+
+dt_model = DecisionTreeRegressor(random_state=42)
+print("DecisionTreeRegressor model instantiated as dt_model.")
+
+print("Starting Decision Tree Regressor model training...")
+dt_model.fit(X_train, y_train)
+print("Decision Tree Regressor model training completed.")
+
+y_pred_dt = dt_model.predict(X_test)
+print("Predictions made on X_test and stored in y_pred_dt.")
+
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+
+# Calculate evaluation metrics
+r2_dt = r2_score(y_test, y_pred_dt)
+mae_dt = mean_absolute_error(y_test, y_pred_dt)
+mse_dt = mean_squared_error(y_test, y_pred_dt)
+rmse_dt = mse_dt**0.5
+
+print(f"Decision Tree Regressor Model Performance:")
+print(f"R-squared: {r2_dt:.4f}")
+print(f"Mean Absolute Error (MAE): {mae_dt:.2f}")
+print(f"Mean Squared Error (MSE): {mse_dt:.2f}")
+print(f"Root Mean Squared Error (RMSE): {rmse_dt:.2f}")
+
+
+
+                                                            
+                                                                                      # Visualize the Decision Tree
+from sklearn.tree import plot_tree
+import matplotlib.pyplot as plt
+
+# Set the figure size to make the plot readable
+plt.figure(figsize=(25, 15))
+
+# Visualize the Decision Tree. Limiting max_depth for better readability.
+plot_tree(
+    dt_model,
+    feature_names=X.columns.tolist(), # Use original column names for features
+    filled=True,
+    rounded=True,
+    fontsize=10,
+    max_depth=3 # Limit depth for visualization
+)
+plt.title("Visualized Decision Tree (Max Depth = 3)", fontsize=15)
+plt.show()

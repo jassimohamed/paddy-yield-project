@@ -1,0 +1,42 @@
+
+                                                                   # LINEAR REGRESSION
+from sklearn.linear_model import LinearRegression
+lr_model = LinearRegression()
+print("LinearRegression model instantiated as lr_model.")
+
+print("Starting Linear Regression model training...")
+lr_model.fit(X_train, y_train)
+print("Linear Regression model training completed.")
+
+y_pred_lr = lr_model.predict(X_test)
+print("Predictions made on X_test and stored in y_pred_lr.")
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+
+# Calculate evaluation metrics
+r2 = r2_score(y_test, y_pred_lr)
+mae = mean_absolute_error(y_test, y_pred_lr)
+mse = mean_squared_error(y_test, y_pred_lr)
+rmse = mse**0.5
+
+print(f"Linear Regression Model Performance:")
+print(f"R-squared: {r2:.4f}")
+print(f"Mean Absolute Error (MAE): {mae:.2f}")
+print(f"Mean Squared Error (MSE): {mse:.2f}")
+print(f"Root Mean Squared Error (RMSE): {rmse:.2f}")
+
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+#  LINEAR REGRESSION HISTOGRAM
+lr = LinearRegression()
+lr.fit(X_train, y_train)
+
+y_pred_lr = lr.predict(X_test)
+errors_lr = y_test - y_pred_lr
+
+plt.figure()
+plt.hist(errors_lr, bins=30)
+plt.title("Linear Regression Error Distribution")
+plt.xlabel("Prediction Error")
+plt.ylabel("Frequency")
+plt.show()
